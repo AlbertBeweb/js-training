@@ -6,6 +6,6 @@ export const exercises = {
   // mapKey / filterKey / reduceKey on objects
   // mapEntry / filterEntry / reduceEntry on objects
   // assign / defaults
-  // assignDeep / defaultsDeep
+  replicate: { feedback: true },
   // at 'a.0.x' { a: [{x: 1}] } -> 1 // at curry
 }
