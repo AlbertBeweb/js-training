@@ -5,7 +5,7 @@ export const exercises = {
   // mapValue / filterValue / reduceValue on objects
   // mapKey / filterKey / reduceKey on objects
   // mapEntry / filterEntry / reduceEntry on objects
-  // assign / defaults
+  shallow: { feedback: true },
   // assignDeep / defaultsDeep
   // at 'a.0.x' { a: [{x: 1}] } -> 1 // at curry
 }
