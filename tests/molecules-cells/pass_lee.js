@@ -6,20 +6,16 @@ const invert = (obj) =>
 
 const RNA = (dna) => {
   let result = ''
-  let a = Object.fromEntries(complements)
-  let splitDNA = dna.split('')
-  splitDNA.forEach((ele) => {
-    result += a[ele]
+  dna.split('').forEach((ele) => {
+    result += complements[ele]
   })
   return result
 }
 
 const DNA = (rna) => {
   let result = ''
-  let a = Object.fromEntries(complements)
-  let b = invert(a)
-  let splitDNA = rna.split('')
-  splitDNA.forEach((ele) => {
+  let b = invert(complements)
+  rna.split('').forEach((ele) => {
     result += b[ele]
   })
   return result
