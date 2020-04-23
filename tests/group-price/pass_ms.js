@@ -1,15 +1,17 @@
 const groupPrice = (str) => {
-  let myregex = /(?:\$|(?:USD))([0-9]+)\.([0-9]{2})/g
-  let match = myregex.exec(str)
-  let res = []
-
-  while (match) {
-    let arr = []
-    arr.push(match[0])
-    arr.push(match[1])
-    arr.push(match[2])
-    res.push(arr)
-    match = myregex.exec(str)
+  let matching = str.match(/(?:\$|\€|(?:USD))([0-9]+)\.([0-9]+)/g)
+  let result = []
+  if (matching == null) {
+    return result
   }
-  return res
+  for(let el of matching) {
+    let spl = el.match(/[USD|€|$]+|[0-9]+/g)
+    let obj = {}
+    obj['currency'] = spl[0]
+    obj['amount'] = spl[1]
+    obj['decimals'] = spl[2]
+    result.push(obj)
+  }
+
+  return result
 }
