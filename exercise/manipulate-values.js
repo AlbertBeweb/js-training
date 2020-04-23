@@ -46,7 +46,6 @@ const nutritionDB = {
   orange: { calories: 49, protein: 0.9, carbs: 13, fiber: 0.2, fat: 0.1 },
 }
 
-
 // /*/ // ⚡
 
 // /*/ // ⚡
@@ -55,13 +54,44 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 // filter values
-t(({ eq }) => eq($filter1, { oil: 50, garlic: 22 }))
-t(({ eq }) => eq($filter2, { onion: 220 }))
-t(({ eq }) => eq($filter3, $2))
+t(({ eq }) =>
+  eq(
+    filterValues(groceriesCart, (v) => v < 80),
+    $filter1
+  )
+)
+t(({ eq }) =>
+  eq(
+    filterValues(groceriesCart, (v) => v === 220),
+    $filter2
+  )
+)
+t(({ eq }) =>
+  eq(
+    filterValues(
+      nutritionDB,
+      (v) => Object.entries(filterValues(v, (ele) => ele === 0)).length !== 0
+    ),
+    $filter3
+  )
+)
 
 // map value
-t(({ eq }) => eq($map1, { tomato: 100, onion: 120 }))
-t(({ eq }) => eq($map2, $1))
+t(({ eq }) =>
+  eq(
+    mapValues(
+      filterValues(groceriesCart, (v) => v >= 200),
+      (ele) => ele - 100
+    ),
+    $map1
+  )
+)
+t(({ eq }) =>
+  eq(
+    mapValues(groceriesCart, (ele) => ele + 100),
+    $map2
+  )
+)
 
 // reduce value
 t(() => reduceValues(groceriesCart, (acc, cr) => acc + cr) === 572)
@@ -71,21 +101,12 @@ t(() => reduceValues({ a: 1, b: 2, c: 3 }, (acc, cr) => acc + cr, 3) === 9)
 Object.freeze(tests)
 
 // filter values
-const $filter1 = filterValues(groceriesCart, (v) => v < 80)
-const $filter2 = filterValues(groceriesCart, (v) => v === 220)
-const $filter3 = filterValues(
-  nutritionDB,
-  (v) => Object.entries(filterValues(v, (ele) => ele === 0)).length !== 0
-)
+const $filter1 = { oil: 50, garlic: 22 }
+const $filter2 = { onion: 220 }
 
 // map value
-const $map1 = mapValues(
-  filterValues(groceriesCart, (v) => v >= 200),
-  (ele) => ele - 100
-)
-const $map2 = mapValues(groceriesCart, (ele) => ele + 100)
-
-const $1 = {
+const $map1 = { tomato: 100, onion: 120 }
+const $map2 = {
   tomato: 300,
   vinegar: 180,
   oil: 150,
@@ -94,7 +115,7 @@ const $1 = {
 }
 
 // prettier-ignore
-const $2 = {
+const $filter3 = {
   vinegar: { calories: 20, protein: 0.04, carbs: 0.6, sugar: 0.4, fiber: 0, fat: 0 },
   oil: { calories: 48, protein: 0, carbs: 0, sugar: 123, fiber: 0, fat: 151 },
   onion: { calories: 0, protein: 1, carbs: 9, sugar: 0, fiber: 0, fat: 0 },
