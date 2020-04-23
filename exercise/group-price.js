@@ -4,11 +4,13 @@
 ### Instructions
 
 Create a `groupPrice` function, that can find a price in a given string.
-The function has to return an array of objects with the the price proprieties
-If there is no match the function returns an empty array.
 
-Example:
+The function must be able to find prices in `$, USD, €`. If there is no match the function returns an empty array.
+The function has to return an array of objects with the price proprieties like the example below.
+
+#### Example:
   "The price is $12.31"
+
 Expected output:
 const output = [
   {
@@ -23,10 +25,19 @@ const output = [
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
-t(({ eq }) => eq(groupPrice('The price of the cereals is $4.00 here, in Portugal it is €5.45.'),$test1))
+t(({ eq }) =>
+  eq(
+    groupPrice(
+      'The price of the cereals is $4.00 here, in Portugal it is €5.45.'
+    ),
+    $test1
+  )
+)
 t(({ eq }) => eq(groupPrice('the total is USD19.98'), $test2))
 t(({ eq }) => eq(groupPrice('excuse me sir it is missing $0.45'), $test3))
-t(({ eq }) => eq(groupPrice('excuse me sir here is your change USD99.20'), $test4))
+t(({ eq }) =>
+  eq(groupPrice('excuse me sir here is your change USD99.20'), $test4)
+)
 t(({ eq }) => eq(groupPrice('this, $0.32, $4.44, €42.43, are a match'), $test0))
 t(({ eq }) => eq(groupPrice('this, 0.32 not a match'), []))
 Object.freeze(tests)
