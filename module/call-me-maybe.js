@@ -12,7 +12,7 @@ export const exercises = {
   // 'do-your-own-reduce': { feedback: true },
   // every: { feedback: true },
   // 'do-your-own-every': { feedback: true },
-  curry: { feedback: true },
+  'mod-string': { feedback: true },
   // curry2: { feedback: true },
   // 'do-your-own-curry': { feedback: true },
   // some: { feedback: true },
